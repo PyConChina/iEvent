@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{block meta}}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {{end}}
+    <meta property="wb:webmaster" content="88c80c8852c52ab7" />
+    <title>{{block title}}{{=settings.LAYOUT.PROJECT}}{{end}}</title>
+    <!-- toplinks -->
+    {{use "bootstrap"}}
+  </head>
+
+  <body>
+
+{{include "menu.html"}}
+{{include "inc_show_flashes.html"}}
+{{block before_header}}{{end}}
+
+{{block header}}
+<style>
+#userinfo.btn-toolbar a {
+vertical-align: middle;
+}
+#userinfo {
+height: 40px;
+vertical-align: middle;
+margin: 0;
+line-height: 40px;
+width:350px;
+text-align:right;
+}
+</style>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">{{block project}}{{=settings.LAYOUT.PROJECT}}{{end}}</a>
+      <div class="nav-collapse">
+        {{block nav}}
+        <ul class="nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        {{end}}
+      {{block user_info}}
+        <p class="pull-right" id="userinfo">Logged in as <a href="#">username</a></p>
+      {{end user_info}}
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+{{end}}
+    
+{{block content}}
+<div class="container">
+    <div class="content-outter">
+        {{block content_main}}
+        {{end}}
+    </div>    
+</div>
+{{end content}}
+
+{{block footer_container}}
+<div class="container">
+  <footer class="row">
+  {{block footer}}
+    uliweb & plugs
+  {{end}}
+  </footer>
+</div>
+{{end footer_container}}      
+
+{{block after_footer}}{{end}}
+
+</body>
+</html>

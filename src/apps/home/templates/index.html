@@ -1,0 +1,25 @@
+{{extend "layout.html"}}
+
+{{block nav}}
+<ul class="nav">
+    {{block menu}}
+    {{menu('home')}}
+    {{end}}
+</ul>
+{{end}}
+
+{{block user_info}}
+<p class="pull-right" id="userinfo">
+{{if hasattr(request, 'user') and request.user:}}
+    <img src="{{=functions.get_user_image(request.user, size=20)}}" align="top"/> {{=unicode(request.user)}} | <a href="/user/view">{{=_('Account Setting')}}</a> | <a href="/logout">{{=_('Logout')}}</a> 
+{{else:}}
+    {{=_('Not signed in yet')}}! <a href="/login">{{=_('Login')}}</a> | <a href="/register">{{=_('Register')}}</a>
+{{pass}}
+</p>
+{{end user_info}}
+
+{{block footer}}
+<p>
+{{<< settings.get_var('LAYOUT/COPYRIGHT')}}
+</p>
+{{end}}
