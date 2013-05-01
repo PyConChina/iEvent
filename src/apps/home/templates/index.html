@@ -55,69 +55,27 @@
 	<div class="shell">
 		<ul>
 			<!-- Slide -->
+            {{for obj in objects:}}
 		    <li>
 		    	<!-- Slide image -->
 		    	<div class="slide-image">
-		    		<img src="/static/images/guido_in_pycon_2013.jpg" alt="" width="397px" height="208px"/>
+		    		<img src="{{=functions.get_href(obj.logo)}}" alt="" style="width:397px;height:208px"/>
 		    	</div>
 		    	<!-- /Slide image -->
 		    	
 		    	<!-- Slide Data -->
-		    	<div class="slide-data">
-		    		<h2>PyCon 2013!</h2>
+		    	<div class="slide-data" style="position:relative;height:250px;">
+		    		<h2>{{=obj.title}}</h2>
 		    		
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc <strong>ornare</strong> consequat tortor quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur <a href="#">adipiscing</a> elit. Nunc ornare consequat tortor quis</p>
-		    		
-		    		<p>sit amet, <strong>consectetur</strong> adipiscing elit. Consectetur adipiscing elit. Nunc ornare consequat <a href="#">tortor</a> quis</p>
-		    		
-		    		<a href="#" class="btn btn-primary btn-rectangle">更多阅读 &raquo;</a>
+		    		{{<< obj.description}}
+                    
+                    <div class="button-link" style="position:absolute;bottom:18px;left:30px;">
+		    		{{<< obj.button_link}}
+                    </div>
 		    	</div>
 		    	<!-- /Slide Data -->
 		    </li>
-		    <!-- /Slide -->
-		    
-			<!-- Slide -->
-		    <li>
-		    	<!-- Slide image -->
-		    	<div class="slide-image">
-		    		<img src="/static/images/credit-card.jpg" alt="" />
-		    	</div>
-		    	<!-- /Slide image -->
-		    	
-		    	<!-- Slide Data -->
-		    	<div class="slide-data">
-		    		<h2>Success!</h2>
-		    		
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc <strong>ornare</strong> consequat tortor quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur <a href="#">adipiscing</a> elit. Nunc ornare consequat tortor quis</p>
-		    		
-		    		<p>sit amet, <strong>consectetur</strong> adipiscing elit. Consectetur adipiscing elit. Nunc ornare consequat <a href="#">tortor</a> quis</p>
-		    		
-		    		<a href="#" class="button">Read More</a>
-		    	</div>
-		    	<!-- /Slide Data -->
-		    </li>
-		    <!-- /Slide -->
-		    
-			<!-- Slide -->
-		    <li>
-		    	<!-- Slide image -->
-		    	<div class="slide-image">
-		    		<img src="/static/images/credit-card.jpg" alt="" />
-		    	</div>
-		    	<!-- /Slide image -->
-		    	
-		    	<!-- Slide Data -->
-		    	<div class="slide-data">
-		    		<h2>Success!</h2>
-		    		
-		    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc <strong>ornare</strong> consequat tortor quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur <a href="#">adipiscing</a> elit. Nunc ornare consequat tortor quis</p>
-		    		
-		    		<p>sit amet, <strong>consectetur</strong> adipiscing elit. Consectetur adipiscing elit. Nunc ornare consequat <a href="#">tortor</a> quis</p>
-		    		
-		    		<a href="#" class="button">Read More</a>
-		    	</div>
-		    	<!-- /Slide Data -->
-		    </li>
+            {{pass}}
 		    <!-- /Slide -->
 		</ul>
 		
@@ -225,10 +183,21 @@
 
 <script>
 $(function(){
+    function mycarousel_initCallback(carousel)
+    {
+        // Pause autoscrolling if the user moves with the cursor over the clip.
+        carousel.clip.hover(function() {
+            carousel.stopAuto();
+        }, function() {
+            carousel.startAuto();
+        });
+    };
+    
     $("#slider ul").jcarousel({
-        scroll:1,
         auto:5,
-        wrap: "both"
+        scroll:1,
+        wrap: "circular",
+        initCallback: mycarousel_initCallback
     });
 });
 </script>

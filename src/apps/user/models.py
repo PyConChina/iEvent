@@ -121,8 +121,8 @@ class User(Model):
             {'name':'is_superuser'},
             {'name':'date_join', 'width':200},
             {'name':'last_login', 'width':200},
-            {'name':'login_type', 'width':40},
-            {'name':'login_site', 'width':50},
+            {'name':'login_type', 'width':60},
+            {'name':'login_site', 'width':80},
         ]
     
     @classmethod

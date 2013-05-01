@@ -1,0 +1,17 @@
+<style>
+#field_title {width:80%;}
+#field_button_link {width:80%;}
+#field_description {width:80%;}
+</style>
+<h1>{{=defined('title') or _('Edit')}}</h1>
+<div>
+<form class="ajax {{=defined('form_class') or 'form-horizontal'}}" 
+    method="POST" 
+    enctype="multipart/form-data"
+    action="{{=defined('action') or functions.request_url()}}"
+    id="edit_form">
+{{build = form.build}}
+{{<< build.body}}
+{{<< build.buttons_line}}
+</form>
+</div>

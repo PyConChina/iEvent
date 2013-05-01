@@ -1,0 +1,26 @@
+{{extend "siteman_admin_layout.html"}}
+
+{{block css}}
+{{super}}
+<style>
+#field_title {width:80%;}
+#field_button_link {width:80%;}
+</style>
+{{end}}
+
+{{block content_main}}
+<h1>{{=defined('title') or _('Add')}}</h1>
+<div>
+<form class="{{=defined('form_class') or 'form-horizontal'}}" 
+    method="POST" 
+    enctype="multipart/form-data"
+    action="{{=defined('action') or functions.request_url()}}"
+    id='add_form'>
+{{build = form.build}}
+{{<< build.body}}
+{{<< build.buttons_line}}
+</form>
+</div>
+
+
+{{end}}

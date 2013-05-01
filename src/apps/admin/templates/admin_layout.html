@@ -16,8 +16,6 @@
 {{block content}}
 {{use "bootheme"}}
 {{link "bootstrap_extend.css"}}
-
-{{block content}}
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
@@ -74,13 +72,14 @@ if request.user and request.user.is_superuser:
             'title':_('Admin Settings'),
             'subs':[
                 {'name':'users', 'title':_('User Manager'), 'link':'/users/list'},
-#                {'name':'roles', 'title':'角色管理', 'link':'/admin/roles'},
-#                {'name':'permissions', 'title':'权限管理', 'link':'/admin/permissions'},
+                {'name':'roles', 'title':'角色管理', 'link':'/admin/roles'},
+                {'name':'permissions', 'title':'权限管理', 'link':'/admin/permissions'},
             ]
         }
     )
     
 pass
+
 if request.user:
     menu_items.append(
         {
@@ -90,6 +89,20 @@ if request.user:
                     {'name': 'receive', 'title':'接收消息', 'link':'/admin/messages/list'},
                     {'name': 'send', 'title':'发送消息', 'link':'/admin/messages/send'},
                     {'name': 'havesend', 'title':'已发消息', 'link':'/admin/messages/sended_list'},
+                    ]
+            }
+            
+    )
+pass
+
+if request.user and request.user.is_superuser:
+    menu_items.append(
+        {
+            'name': 'site_manage',
+            'title': '站点管理',
+            'subs':[
+                    {'name': 'headline', 'title':'头条管理', 'link':'/admin/headlines'},
+                    {'name': 'links', 'title':'链接管理', 'link':'/admin/links'},
                     ]
             }
             
