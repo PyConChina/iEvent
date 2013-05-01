@@ -1,23 +1,25 @@
 {{extend "layout.html"}}
+
+{{block menu}}
+{{menu('home')}}
+{{end}}
+
 {{block user_info}}{{end}}
+
 {{block content}}
-{{include "inc_jquery_dialog2.html"}}
-<div id="login" style="display: none">
-	<h1>{{=_('Login')}}</h1>
-	<div>
-		{{<<form}}
+<div id="login" class="container">
+	<h2>{{=_('Login')}}</h2>
+	
+	<form class="form-horizontal" method="POST">
+		{{build = form.build}}
+		{{<< build.body}}
+		<button type="submit" class="btn btn-primary btn-large">{{=_('Login')}}</button>
+	</form>
+	
+	<div class="side">
+		<p>
+			<a href="{{=functions.get_oauth_login_url('weibo')}}"><img src="{{=url_for_static('images/weibo_sina_login.png')}}"/></a>
+		</p>
 	</div>
 </div>
-<script type="text/javascript">
-	$(function() {
-		$("#login").dialog2({
-			showCloseHandle: false,
-			removeOnClose: false, 
-			autoOpen: true, 
-			closeOnEscape: false, 
-			closeOnOverlayClick: false
-		});
-
-	});
-</script>
 {{end}}

@@ -1,0 +1,105 @@
+{{extend "layout.html"}}
+
+{{block menu}}
+{{menu('admin')}}
+{{end}}
+
+{{block content_tool_container}}
+{{end}}
+
+{{block before_header}}
+{{link "bootstrap_extend.css"}}
+{{include "menu.html"}}
+{{include "inc_show_flashes.html"}}
+{{end}}
+
+{{block content}}
+{{use "bootheme"}}
+{{link "bootstrap_extend.css"}}
+
+{{block content}}
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <div class="sidebar-nav">
+        {{block content_sidebar}}
+
+        {{end content_sidebar}}         
+      </div>
+
+    </div><!--/span-->
+    <div class="span10 content-container">
+        <div class="clearfix content-outter">
+            {{block content_tool_container}}
+            <div class="content_tool">
+                {{block content_tool}}
+                {{end}}
+            </div>
+            {{end}}
+            
+            {{block content_main}}
+            {{end}}
+        </div>    
+    </div><!--/span-->
+    
+  </div><!--/row-->
+</div>
+{{end content}}
+
+{{block content_sidebar}}
+{{use "jquery"}}
+{{use "jsmenu"}}
+{{
+menu_items = []
+if request.user:
+    menu_items.append(
+        {
+        'name': 'user',
+        'title':_('Settings'),
+        'subs':[
+                {'name': 'information', 'title':_('Information'), 'link':'/user/view'},
+                ]
+        },
+    )
+pass
+
+if request.user.login_type == '0':
+    menu_items[-1]['subs'].append({'name': 'password', 'title':_('Change Password'), 'link':'/user/change_password'})
+pass
+
+if request.user and request.user.is_superuser:
+    menu_items.append(
+        {
+            'name': 'user_admin',
+            'title':_('Admin Settings'),
+            'subs':[
+                {'name':'users', 'title':_('User Manager'), 'link':'/users/list'},
+#                {'name':'roles', 'title':'角色管理', 'link':'/admin/roles'},
+#                {'name':'permissions', 'title':'权限管理', 'link':'/admin/permissions'},
+            ]
+        }
+    )
+    
+pass
+if request.user:
+    menu_items.append(
+        {
+            'name': 'messages',
+            'title': '消息',
+            'subs':[
+                    {'name': 'receive', 'title':'接收消息', 'link':'/admin/messages/list'},
+                    {'name': 'send', 'title':'发送消息', 'link':'/admin/messages/send'},
+                    {'name': 'havesend', 'title':'已发消息', 'link':'/admin/messages/sended_list'},
+                    ]
+            }
+            
+    )
+pass
+
+}}  
+<div class="sidebar">
+    {{block sub_menu}}
+    {{sub_menu(menu_items, 'user')}}
+    {{end}}
+</div>
+{{end}}

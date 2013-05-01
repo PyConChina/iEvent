@@ -1,0 +1,24 @@
+{{extend 'user_admin_layout.html'}}
+
+{{block sub_menu}}
+{{sub_menu(menu_items, 'user', 'information')}}
+{{end}}
+
+{{block content_main}}
+{{use "jquery", css_only=True}}
+<div class="row-fluid">
+    <div class="span2 well" style="margin: 0 auto;text-align:center;">
+        <img src="{{=functions.get_user_image(request.user, 80)}}" class="portrait"/>
+    </div>
+    <div class="span5">
+        <div class="box-body">
+            {{embed view}}
+            {{if can_modify:}}
+            <div class="box-bottom">
+            <a class="btn btn-green" href="{{=url_for('user_admin.views_admin.UserView.edit')}}">{{=_('Edit')}}</a>
+            </div>
+            {{pass}}
+        </div>
+    </div>
+</div>
+{{end}}

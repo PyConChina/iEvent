@@ -6,8 +6,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {{end}}
-    <meta property="wb:webmaster" content="88c80c8852c52ab7" />
+    {{<< settings.get_var('WEIBO/META')}}
     <title>{{block title}}{{=settings.LAYOUT.PROJECT}}{{end}}</title>
+    {{block css}}
+        <link href="/static/site.css" rel="stylesheet" type="text/css" />
+    {{end}}
     <!-- toplinks -->
     {{use "bootstrap"}}
   </head>
@@ -19,42 +22,25 @@
 {{block before_header}}{{end}}
 
 {{block header}}
-<style>
-#userinfo.btn-toolbar a {
-vertical-align: middle;
-}
-#userinfo {
-height: 40px;
-vertical-align: middle;
-margin: 0;
-line-height: 40px;
-width:350px;
-text-align:right;
-}
-</style>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">{{block project}}{{=settings.LAYOUT.PROJECT}}{{end}}</a>
-      <div class="nav-collapse">
-        {{block nav}}
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+<div id="header-top">
+    <div class="pull-left">
+        <ul>
+            {{block nav_project}}<li>{{=settings.LAYOUT.PROJECT}}</li>{{end}}
+            {{block menu}}
+                {{menu('home')}}
+            {{end}}
         </ul>
-        {{end}}
-      {{block user_info}}
-        <p class="pull-right" id="userinfo">Logged in as <a href="#">username</a></p>
-      {{end user_info}}
-      </div><!--/.nav-collapse -->
     </div>
-  </div>
+    
+    {{block user_info}}
+        <div class="pull-right">
+        {{if hasattr(request, 'user') and request.user:}}
+            <img src="{{=functions.get_user_image(request.user, size=20)}}" align="top"/> {{=unicode(request.user)}} | <a href="/user/view">{{=_('Account Setting')}}</a> | <a href="/logout">{{=_('Logout')}}</a> 
+        {{else:}}
+            <a href="/login">{{=_('Login')}}</a>
+        {{pass}}
+        </div>
+    {{end}}
 </div>
 {{end}}
     
@@ -68,14 +54,29 @@ text-align:right;
 {{end content}}
 
 {{block footer_container}}
-<div class="container">
-  <footer class="row">
-  {{block footer}}
-    uliweb & plugs
-  {{end}}
-  </footer>
+<!-- Footer -->
+<div id="footer">
+	<div class="shell">
+		<!-- Footer Navigation -->
+		<ul>
+		    <li><a href="#">Home</a></li>
+		    <li><a href="#">About us</a></li>
+		    <li><a href="#">Services</a></li>
+		    <li><a href="#">Solutions</a></li>
+		    <li><a href="#">Blog</a></li>
+		    <li><a href="#">Testimonials</a></li>
+		    <li class="last"><a href="#">Contacts</a></li>
+		</ul>
+		<!-- /Footer Navigation -->
+		
+		<!-- Copyrights -->
+		<p class="copy">{{<< settings.get_var('LAYOUT/COPYRIGHT')}}</p>
+		<!-- /Copyrights -->
+		<div class="cl">&nbsp;</div>
+	</div>
 </div>
-{{end footer_container}}      
+<!-- /Footer -->
+{{end}}
 
 {{block after_footer}}{{end}}
 
