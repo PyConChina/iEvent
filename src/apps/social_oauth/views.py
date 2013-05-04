@@ -41,6 +41,6 @@ def callback(site):
         user.save()
         login(user)
         #引导用户填写邮箱地址
-        return redirect('/user')
+        return redirect('/')
     else:
         user.last_login = date.now()

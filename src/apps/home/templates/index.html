@@ -18,7 +18,7 @@
     {{block user_info}}
         <div class="pull-right">
         {{if hasattr(request, 'user') and request.user:}}
-            <img src="{{=functions.get_user_image(request.user, size=20)}}" align="top"/> {{=unicode(request.user)}} | <a href="/user/view">{{=_('Account Setting')}}</a> | <a href="/logout">{{=_('Logout')}}</a> 
+            <img src="{{=functions.get_user_image(request.user, size=20)}}" align="top" style="height:20px;width:20px;"/> {{=unicode(request.user)}} | <a href="/user/view">{{=_('Account Setting')}}</a> | <a href="/logout">{{=_('Logout')}}</a> 
         {{else:}}
             <a href="/login">{{=_('Login')}}</a>
         {{pass}}
