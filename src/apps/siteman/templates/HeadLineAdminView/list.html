@@ -42,14 +42,16 @@ border-radius: 5px;}
                         <div class="empty-img" ng-show="!obj.logo" data-id="{%obj.id%}">
                             点击上传图片
                         </div>
-                        <div class="item-body">
-                            {% obj.description %}
+                        <div class="item-body" ng-bind-html-unsafe="obj.description">
                         </div>
                     </div>
                     <div class="panel-footer">
                         <img title="点击取消在首页显示" src="{{=url_for_static('siteman/checked.png')}}" ng-show="obj.active" width="16px" height="16px" ng-click="active(obj.id)"/>
                         <img title="点击设置在首页显示" src="{{=url_for_static('siteman/unchecked.png')}}" ng-show="!obj.active" width="16px" height="16px" ng-click="active(obj.id)"/>
+                        设置活动
+                        &nbsp;&nbsp;
                         <a href="#" ng-click="edit(obj.id)">修改</a>
+                        &nbsp;&nbsp;
                         <a href="#" ng-click="remove(obj.id)">删除</a>
                     </div>
                 </div>

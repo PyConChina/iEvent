@@ -55,6 +55,7 @@
 	<div class="shell">
 		<ul>
 			<!-- Slide -->
+            {{from uliweb.utils.textconvert import text2html}}
             {{for obj in objects:}}
 		    <li>
 		    	<!-- Slide image -->
@@ -67,7 +68,7 @@
 		    	<div class="slide-data" style="position:relative;height:250px;">
 		    		<h2>{{=obj.title}}</h2>
 		    		
-		    		{{<< obj.description}}
+		    		{{<< text2html(obj.description)}}
                     
                     <div class="button-link" style="position:absolute;bottom:18px;left:30px;">
 		    		{{<< obj.button_link}}

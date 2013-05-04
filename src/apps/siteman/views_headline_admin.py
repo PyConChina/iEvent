@@ -1,4 +1,5 @@
 #coding=utf8
+import os.path
 from uliweb import expose, functions, settings
 from uliweb.i18n import gettext_lazy as _
 
@@ -163,6 +164,7 @@ class HeadLineAdminView(object):
         上传logo处理
         """
         from uliweb.form import Form, ImageField
+        from uliweb.orm import Begin, Commit, Rollback
         class ImageForm(Form):
             file = ImageField()
            
@@ -172,9 +174,18 @@ class HeadLineAdminView(object):
         
         form = ImageForm()
         if form.validate(request.files):
-            fname = functions.save_file(form.data['file'].filename, form.data['file'].file)
+            fname = functions.save_file(os.path.join('siteman', form.data['file'].filename), form.data['file'].file)
+            old_logo = obj.logo
             obj.logo = fname
-            obj.save()
+            Begin()
+            try:
+                obj.save()
+                Commit()
+                if old_logo:
+                    functions.delete_filename(old_logo)
+            except:
+                Rollback()
+                raise
             return json({'success':True, 'data':{'logo':functions.get_href(fname)}})
         else:
             return json({'success':False, 'message':form.error['file']})

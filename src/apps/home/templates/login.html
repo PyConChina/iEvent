@@ -7,19 +7,23 @@
 {{block user_info}}{{end}}
 
 {{block content}}
-<div id="login" class="container">
-	<h2>{{=_('Login')}}</h2>
-	
-	<form class="form-horizontal" method="POST">
-		{{build = form.build}}
-		{{<< build.body}}
-		<button type="submit" class="btn btn-primary btn-large">{{=_('Login')}}</button>
-	</form>
-	
-	<div class="side">
-		<p>
-			<a href="{{=functions.get_oauth_login_url('weibo')}}"><img src="{{=url_for_static('images/weibo_sina_login.png')}}"/></a>
-		</p>
+<div id="login-container" class="container">
+	<div class="row">
+	<div id="login" class="span6 offset3">
+		<h2>{{=_('Login')}}</h2>
+		
+		<form class="form-horizontal" method="POST">
+			{{build = form.build}}
+			{{<< build.body}}
+			<button type="submit" class="btn btn-primary">{{=_('Login')}}</button>
+		</form>
+		
+		<div class="social-login">
+			<p>
+				<a href="{{=functions.get_oauth_login_url('weibo')}}"><img src="{{=url_for_static('images/weibo_sina_login.png')}}"/></a>
+			</p>
+		</div>
+	</div>
 	</div>
 </div>
 {{end}}

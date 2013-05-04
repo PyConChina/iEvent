@@ -9,12 +9,11 @@ body { padding-top:50px; font-size: 12px; line-height:19px; font-family: Arial, 
 
 .shell { width:964px; margin:0 auto; position:relative;  }
 
+#login-container {margin:0 auto;margin-top:30px; margin-bottom:30px;}
 #login {margin-top:30px; margin-bottom:30px; border:1px solid #999; padding:18px; position:relative;}
 #login h2 {border-bottom:1px dotted #ccc;}
 #login button {margin-left:178px;}
-#login .side {position:absolute; right:350px; top:150px;}
-#login .side p {font-size:12px; color:#999;}
-#login .side p span{color:#000;}
+#login .social-login {padding:18px; border-top:1px dotted #ccc;}
 
 #footer { background:#3366cc; color:#e5e1e1;border-top:1px solid #e1e1e1; font-size:10px;  height:49px; }
 #footer .shell { background:#3366cc; margin-top:18px;}
