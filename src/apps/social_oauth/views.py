@@ -44,3 +44,5 @@ def callback(site):
         return redirect('/')
     else:
         user.last_login = date.now()
+        user.save()
+        return redirect('/')
